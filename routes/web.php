@@ -1,6 +1,32 @@
 <?php
 
-use App\Http\Controllers\Home\HomeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Home\HomeController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Patient\AppointmentsController;
+use App\Http\Controllers\Patient\InvoicesController;
+use App\Http\Controllers\Patient\PasswordController;
+use App\Http\Controllers\Patient\PatientDashboard;
+use App\Http\Controllers\Patient\ProfileController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+
+Route::get('/register', [RegisterController::class, 'index'])->name('register');
+
+Route::get('/forgot_password', [ForgotPasswordController::class, 'index'])->name('forgotPassword');
+
+// Patient Dashboard routes
+
+Route::prefix('patient')->group(function () {
+
+    Route::get('/', [PatientDashboard::class, 'index'])->name('patientDashboard');
+    Route::get('/appointments', [AppointmentsController::class, 'index'])->name('patientAppointments');
+    Route::get('/invoices', [InvoicesController::class, 'index'])->name('patientInvoices');
+    Route::get('/profile_settings', [ProfileController::class, 'index'])->name('patientProfile');
+    Route::get('/change_password', [PasswordController::class, 'index'])->name('patientChangePassword');
+    
+});

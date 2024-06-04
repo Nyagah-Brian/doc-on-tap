@@ -8,10 +8,7 @@
                             <img src="assets/img/footer-logo.png" alt="logo" />
                         </div>
                         <div class="footer-about-content">
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                sed do eiusmod tempor incididunt ut labore et dolore magna
-                                aliqua.
+                            <p>DocOnTap is a user-friendly platform designed to streamline the process of booking appointments with healthcare providers.
                             </p>
                             <div class="social-icon">
                                 <ul>
