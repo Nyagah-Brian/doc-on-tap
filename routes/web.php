@@ -20,15 +20,22 @@ use App\Http\Controllers\Patient\PatientAppointmentsController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::get('/auth/login', [LoginController::class, 'index'])->name('account.login');
+Route::post('/auth/user/login', [LoginController::class, 'login2'])->name('login.user');
 
-Route::get('/register', [RegisterController::class, 'index'])->name('register');
+Route::get('/auth/logout', [LoginController::class, 'logout'])->name('account.logout');
 
-Route::get('/forgot_password', [ForgotPasswordController::class, 'index'])->name('forgotPassword');
+Route::get('/auth/register', [RegisterController::class, 'index'])->name('account.register');
+Route::post('/auth/register/user', [RegisterController::class, 'register'])->name('account.registerUser');
+
+Route::get('/auth/forgot_password', [LoginController::class, 'forgotPassword'])->name('account.forgotPassword');
+Route::post('/auth/forgot_password/send_password_reset_link', [LoginController::class, 'sendResetPasswordLink'])->name('account.sendResetPasswordLink');
+Route::get('/auth/reset_password/{token}', [LoginController::class, 'resetPassword'])->name('password.reset');
+Route::post('/auth/reset_password/password/update', [LoginController::class, 'updatePassword'])->name('password.change');
 
 // Patient Dashboard routes
 
-Route::prefix('patient')->group(function () {
+Route::middleware(['auth'])->prefix('patient')->group(function () {
 
     Route::get('/', [PatientDashboard::class, 'index'])->name('patientDashboard');
     Route::get('/appointments', [PatientAppointmentsController::class, 'index'])->name('patientAppointments');
