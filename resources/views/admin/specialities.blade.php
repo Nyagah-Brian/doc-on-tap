@@ -25,34 +25,39 @@
                                 <table class="datatable table table-hover table-center mb-0">
                                     <thead>
                                         <tr>
-                                            <th>#</th>
                                             <th>Specialities</th>
+                                            <th>Description</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        
-                                        <tr>
-                                            <td>#SP005</td>
-                                            <td>
-                                                <h2 class="table-avatar">
-                                                    
-                                                    <a href="profile.html">Dentist</a>
-                                                </h2>
-                                            </td>
-                                            <td>
-                                                <div class="actions">
-                                                    <a class="btn btn-sm bg-success-light" data-bs-toggle="modal"
-                                                        href="#edit_specialities_details">
-                                                        <i class="fe fe-pencil"></i> Edit
-                                                    </a>
-                                                    <a class="btn btn-sm bg-danger-light" data-bs-toggle="modal"
-                                                        href="#delete_modal">
-                                                        <i class="fe fe-trash"></i> Delete
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                        @foreach ($specialities as $speciality) 
+                                            <tr>
+                                                <td>
+                                                    <h2 class="table-avatar"> 
+                                                        {{ $speciality->name }} 
+                                                    </h2>
+                                                </td>
+                                                <td>
+                                                    {{ $speciality->description }} 
+                                                </td>
+                                
+                                                <td>
+                                                    <div class="actions">
+                                                        {{-- Assuming you have a speciality edit route --}}
+                                                        <a class="btn btn-sm bg-success-light" data-bs-toggle="modal"
+                                                            href=""> 
+                                                            <i class="fe fe-pencil"></i> Edit
+                                                        </a>
+                                                        {{-- Assuming you have a speciality delete route or can handle this via JavaScript --}}
+                                                        <a class="btn btn-sm bg-danger-light" data-bs-toggle="modal"
+                                                            href="#delete_modal" onclick="confirmDelete('{{ $speciality->id }}')"> 
+                                                            <i class="fe fe-trash"></i> Delete
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

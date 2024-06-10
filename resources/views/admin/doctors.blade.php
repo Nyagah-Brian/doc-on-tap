@@ -25,32 +25,25 @@
                                 <table class="datatable table table-hover table-center mb-0">
                                     <thead>
                                         <tr>
-                                            <th>Doctor Name</th>
+                                            <th>Name</th>
                                             <th>Speciality</th>
-                                            <th>Member Since</th>
-                                            <th>Earned</th>
-                                            <th>Account Status</th>
+                                            <th>License Number</th>
+                                            <th>Years of Experience</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>
-                                                <h2 class="table-avatar">
-                                                    
-                                                    <a href="profile.html">Dr. Ruby Perrin</a>
-                                                </h2>
-                                            </td>
-                                            <td>Dental</td>
-                                            <td>14 Jan 2023 <br><small>02.59 AM</small></td>
-                                            <td>$3100.00</td>
-                                            <td>
-                                                <div class="status-toggle">
-                                                    <input type="checkbox" id="status_1" class="check" checked>
-                                                    <label for="status_1" class="checktoggle">checkbox</label>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        
+                                        @foreach ($doctors as $doctor)
+                                            <tr>
+                                                <td>{{ $doctor->user->first_name }} {{ $doctor->user->last_name }}</td>
+                                                <td>{{ $doctor->speciality->name }}</td>
+                                                <td>{{ $doctor->license_number }}</td>
+                                                <td>{{ $doctor->years_of_experience }}</td>
+                                                <td>
+                                                    {{-- Add your action buttons/links here (e.g., View, Edit, Delete) --}}
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

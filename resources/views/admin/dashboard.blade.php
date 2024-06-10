@@ -27,7 +27,7 @@
                                 <i class="fe fe-users"></i>
                             </span>
                             <div class="dash-count">
-                                <h3>168</h3>
+                                <h3>{{ $doctorCount }}</h3>
                             </div>
                         </div>
                         <div class="dash-widget-info">
@@ -47,7 +47,7 @@
                                 <i class="fe fe-credit-card"></i>
                             </span>
                             <div class="dash-count">
-                                <h3>487</h3>
+                                <h3>{{ $patientCount }}</h3>
                             </div>
                         </div>
                         <div class="dash-widget-info">
@@ -67,11 +67,11 @@
                                 <i class="fe fe-money"></i>
                             </span>
                             <div class="dash-count">
-                                <h3>485</h3>
+                                <h3>{{ $appointmentCount }}</h3>
                             </div>
                         </div>
                         <div class="dash-widget-info">
-                            <h6 class="text-muted">Appointment</h6>
+                            <h6 class="text-muted">Appointments</h6>
                             <div class="progress progress-sm">
                                 <div class="progress-bar bg-danger w-50"></div>
                             </div>
@@ -87,7 +87,7 @@
                                 <i class="fe fe-folder"></i>
                             </span>
                             <div class="dash-count">
-                                <h3>$62523</h3>
+                                <h3>ksh {{ $revenue }}</h3>
                             </div>
                         </div>
                         <div class="dash-widget-info">

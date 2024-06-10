@@ -27,47 +27,33 @@
                                         <tr>
                                             <th>Patient Name</th>
                                             <th>Doctor Name</th>
-                                            <th>Ratings</th>
-                                            <th>Description</th>
-                                            <th>Date</th>
+                                            <th>Rating</th>
+                                            <th>Comment</th>
+                                            <th>Appointment Date</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>
-                                                <h2 class="table-avatar">
-                                                    
-                                                    <a href="profile.html">Charlene Reed </a>
-                                                </h2>
-                                            </td>
-                                            <td>
-                                                <h2 class="table-avatar">
-                                                    
-                                                    <a href="profile.html">Dr. Ruby Perrin</a>
-                                                </h2>
-                                            </td>
-                                            <td>
-                                                <i class="fe fe-star text-warning"></i>
-                                                <i class="fe fe-star text-warning"></i>
-                                                <i class="fe fe-star text-warning"></i>
-                                                <i class="fe fe-star text-warning"></i>
-                                                <i class="fe fe-star-o text-secondary"></i>
-                                            </td>
-                                            <td>
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                                            </td>
-                                            <td>3 Nov 2023 <br><small>09.59 AM</small></td>
-                                            <td>
-                                                <div class="actions">
-                                                    <a class="btn btn-sm bg-danger-light" data-bs-toggle="modal"
-                                                        href="#delete_modal">
-                                                        <i class="fe fe-trash"></i> Delete
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        
+                                        @foreach ($reviews as $review)
+                                            <tr>
+                                                <td>{{ $review->appointment->patient->user->first_name }}
+                                                    {{ $review->appointment->patient->user->last_name }}</td>
+                                                <td>{{ $review->appointment->doctor->user->first_name }}
+                                                    {{ $review->appointment->doctor->user->last_name }}</td>
+                                                <td>{{ $review->rating }}</td>
+                                                <td>{{ $review->comment }}</td>
+                                                <td>
+                                                    {{ $review->appointment->appointment_time->format('j M Y') }}
+                                                    <span class="text-primary d-block">
+                                                        {{ $review->appointment->appointment_time->format('h:i A') }}
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    {{-- Add your action buttons/links here (e.g., View, Delete) --}}
+                                                </td>
+                                            </tr>
+                                        @endforeach
+
                                     </tbody>
                                 </table>
                             </div>

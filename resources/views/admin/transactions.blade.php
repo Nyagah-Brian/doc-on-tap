@@ -26,37 +26,27 @@
                             <table class="datatable table table-hover table-center mb-0">
                                 <thead>
                                     <tr>
-                                        <th>Invoice Number</th>
-                                        <th>Patient ID</th>
+                                        <th>Invoice ID</th>
                                         <th>Patient Name</th>
+                                        <th>Appointment Date</th>
                                         <th>Total Amount</th>
                                         <th>Status</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($invoices as $invoice)
                                     <tr>
-                                        <td><a href="invoice.html">#IN0001</a></td>
-                                        <td>#PT001</td>
+                                        <td>{{ $invoice->id }}</td>
+                                        <td>{{ $invoice->patient->user->first_name }} {{ $invoice->patient->user->last_name }}</td>
+                                        <td>{{ $invoice->appointment ? $invoice->appointment->appointment_time : 'N/A' }}</td>
+                                        <td>{{ $invoice->total_amount }}</td>
+                                        <td>{{ $invoice->status }}</td>
                                         <td>
-                                            <h2 class="table-avatar">
-                                               
-                                                <a href="profile.html">Charlene Reed </a>
-                                            </h2>
-                                        </td>
-                                        <td>$100.00</td>
-                                        <td>
-                                            <span class="badge rounded-pill bg-success inv-badge">Paid</span>
-                                        </td>
-                                        <td>
-                                            <div class="actions">
-                                                <a class="btn btn-sm bg-danger-light" data-bs-toggle="modal"
-                                                    href="#delete_modal">
-                                                    <i class="fe fe-trash"></i> Delete
-                                                </a>
-                                            </div>
+                                            {{-- Add your action buttons/links here (e.g., View, Edit, Send Reminder) --}}
                                         </td>
                                     </tr>
+                                @endforeach
                                     
                                 </tbody>
                             </table>
