@@ -127,22 +127,20 @@
 
         <li class="nav-item dropdown has-arrow">
             <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
-                <span class="user-img"><img class="rounded-circle" src="{{ asset('assets/admin/img/profiles/avatar-01.jpg')}}"
-                        width="31" alt="Ryan Taylor" /></span>
+                <span class="user-img">{!! Avatar::create(Auth::user()->first_name . ' ' . Auth::user()->last_name)->setFontSize(20)->setDimension(42)->toSvg() !!}</span>
             </a>
             <div class="dropdown-menu">
                 <div class="user-header">
                     <div class="avatar avatar-sm">
-                        <img src="{{ asset('assets/admin/img/profiles/avatar-01.jpg')}}" alt="User Image"
-                            class="avatar-img rounded-circle" />
+                        {!! Avatar::create(Auth::user()->first_name . ' ' . Auth::user()->last_name)->setFontSize(20)->setDimension(42)->toSvg() !!}
                     </div>
                     <div class="user-text">
-                        <h6>Ryan Taylor</h6>
-                        <p class="text-muted mb-0">Administrator</p>
+                        <h6>{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</h6>
+                        <p class="text-muted mb-0">{{ Auth::user()->getRoleNames()->first() }}</p>
                     </div>
                 </div>
                 <a class="dropdown-item" href="profile.html">My Profile</a>
-                <a class="dropdown-item" href="login.html">Logout</a>
+                <a class="dropdown-item" href="{{ route('account.logout')}}">Logout</a>
             </div>
         </li>
     </ul>

@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\AppointmentsController;
 use App\Http\Controllers\Admin\SpecialitiesController;
 use App\Http\Controllers\Admin\TransactionsController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Doctor\DoctorDashboard;
 use App\Http\Controllers\Patient\PatientAppointmentsController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -41,13 +42,21 @@ Route::middleware(['auth'])->prefix('patient')->group(function () {
     Route::get('/appointments', [PatientAppointmentsController::class, 'index'])->name('patientAppointments');
     Route::get('/invoices', [InvoicesController::class, 'index'])->name('patientInvoices');
     Route::get('/profile_settings', [ProfileController::class, 'index'])->name('patientProfile');
-    Route::get('/change_password', [PasswordController::class, 'index'])->name('patientChangePassword');
+    Route::put('/profile_update', [ProfileController::class, 'update'])->name('patientProfileUpdate');
+    Route::get('/profile', [PasswordController::class, 'index'])->name('patientChangePassword');
+    
+});
+
+Route::middleware(['auth'])->prefix('doctor')->group(function () {
+
+    Route::get('/', [DoctorDashboard::class, 'index'])->name('doctorDashboard');
+
     
 });
 
 //  Admin Dashboard Routes
 
-Route::prefix('admin')->group(function () {
+Route::middleware(['auth'])->prefix('admin')->group(function () {
 
     Route::get('/', [AdminDashboard::class, 'index'])->name('admin.dashboard');
     Route::get('/dashboard', [AdminDashboard::class, 'index'])->name('admin.dashboard');

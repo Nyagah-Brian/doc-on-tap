@@ -2,11 +2,13 @@
 
 namespace Database\Seeders;
 
+use App\Models\Role;
 use App\Models\User;
 use App\Models\Doctor;
 use App\Models\Speciality;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DoctorSeeder extends Seeder
@@ -36,7 +38,7 @@ class DoctorSeeder extends Seeder
                 'last_name' => $faker->lastName,
                 'email' => $faker->unique()->safeEmail,
                 'email_verified_at' => now(),
-                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+                'password' => Hash::make('Brayo@2030.'), // password
                 'phone_number' => $faker->unique()->phoneNumber,
                 'country_code' => '254',  
                 'address' => $faker->address,
@@ -44,6 +46,12 @@ class DoctorSeeder extends Seeder
                 'gender' => $faker->randomElement(['male', 'female']), 
                 'status' => 'active', 
             ]);
+
+            // Get the "Administrator" role
+            $doctorRole = Role::where('name', 'Doctor')->first();
+
+            // Assign the role to the user
+            $user->assignRole($doctorRole);
 
             // Create Doctor (Linked to User and Speciality)
             Doctor::create([

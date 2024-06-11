@@ -29,74 +29,68 @@ class LoginController extends Controller
     public function login2(Request $request)
     {
         $validatedData = $request->validate([
-            'username' => 'required',
+            'email' => 'required',
             'password' => 'required|min:6',
         ]);
 
-        $user = User::where('username', $validatedData['username'])->first();
+        $user = User::where('email', $validatedData['email'])->first();
 
         if (!$user) {
             return redirect()
                 ->back()
-                ->withInput($request->only('username', 'remember'))
+                ->withInput($request->only('email', 'remember'))
                 ->with(['error' => 'This account does not exist']);
         }
 
         if (!Hash::check($validatedData['password'], $user->password)) {
             return redirect()
                 ->back()
-                ->withInput($request->only('username', 'remember'))
+                ->withInput($request->only('email', 'remember'))
                 ->with(['error' => 'Invalid credentials! Please try again']);
         }
 
         if ($user->status === 'inactive') {
             return redirect()
                 ->back()
-                ->withInput($request->only('username', 'remember'))
+                ->withInput($request->only('email', 'remember'))
                 ->with(['error' => 'Your account is currently deactivated']);
         }
 
         if ($user->status === 'suspended') {
             return redirect()
                 ->back()
-                ->withInput($request->only('username', 'remember'))
+                ->withInput($request->only('email', 'remember'))
                 ->with(['error' => 'This account is suspended. Please contact administrator']);
         }
 
-        if ($user->status === 'locked') {
-            return redirect()
-                ->back()
-                ->withInput($request->only('username', 'remember'))
-                ->with(['error' => 'The system access is currently locked.']);
-        }
 
-        Auth::login($user, true);
+        Auth::login($user);
 
         // Store the user ID in the session
         session([
             'user_id' => Auth::id(),
             'email' => $user->email,
-            'student_id' => $user->student_id,
             'username' => $user->username,
-            'team_id' => $user->team_id,
-            'mobile' => $user->mobile,
+            'phone_number' => $user->phone_number,
             'name' => $user->first_name . ' ' . $user->last_name,
             'role' => $user->getRoleNames()->first(), // Get the first role name associated with the user
             'lastActivity' => time(),
         ]);
 
+        // dd(Auth::user()->getRoleNames()->first());
+        
         if (auth()->user()->hasRole('Administrator')) {
             return redirect()
                 ->route('admin.dashboard')
                 ->with(['success' => 'You have successfully logged in as an Administrator.']);
-        }elseif (auth()->user()->hasRole('Student')) {
+        }elseif (auth()->user()->hasRole('Patient')) {
             return redirect()
-                ->route('member.dashboard')
-                ->with(['success' => 'Student Account']);
-        }elseif (auth()->user()->hasRole('Security')) {
+                ->route('patientDashboard')
+                ->with(['success' => 'You have successfully logged in as a Patient.']);
+        }elseif (auth()->user()->hasRole('Doctor')) {
             return redirect()
-                ->route('security.dashboard')
-                ->with(['success' => 'Security Account']);
+                ->route('doctorDashboard')
+                ->with(['success' => 'You have successfully logged in as a Doctor.']);
         }
 
     }

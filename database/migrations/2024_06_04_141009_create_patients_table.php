@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('patients', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('user_id')->unique();
-            $table->string('medical_record_number')->unique();
+            $table->string('medical_record_number')->unique()->nullable();
             $table->text('emergency_contact')->nullable(); // JSON field for emergency contact details
             $table->text('medical_history')->nullable(); // JSON field for medical history
             $table->timestamps();

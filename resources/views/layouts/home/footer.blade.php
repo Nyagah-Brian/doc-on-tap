@@ -5,7 +5,7 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="footer-widget footer-about">
                         <div class="footer-logo">
-                            <img src="assets/img/footer-logo.png" alt="logo" />
+                            <img src="{{ asset('assets/img/footer-logo.png')}}" alt="logo" />
                         </div>
                         <div class="footer-about-content">
                             <p>DocOnTap is a user-friendly platform designed to streamline the process of booking appointments with healthcare providers.

@@ -4,14 +4,14 @@
         <div class="widget-profile pro-widget-content">
             <div class="profile-info-widget">
                 <a href="{{ route('patientDashboard')}}" class="booking-doc-img">
-                    <img src="{{ asset('assets/img/doctors-dashboard/profile-06.jpg')}}" alt="User Image">
+                    {!! Avatar::create(Auth::user()->first_name . ' ' . Auth::user()->last_name)->setFontSize(30)->setDimension(90)->toSvg() !!}
                 </a>
                 <div class="profile-det-info">
-                    <h3><a href="{{ route('patientDashboard')}}">Hendrita</a></h3>
-                    <div class="patient-details">
+                    <h3><a href="{{ route('patientDashboard')}}">{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</a></h3>
+                    {{-- <div class="patient-details">
                         <h5 class="mb-0">Patient ID : PT254654</h5>
                     </div>
-                    <span>Female <i class="fa-solid fa-circle"></i> 32 years 03 Months</span>
+                    <span>Female </span> --}}
                 </div>
             </div>
         </div>
@@ -40,17 +40,17 @@
                         </a>
                     </li>
 
-                    <li class="{{ request()->is('patient/profile_settings*') ? 'active' : '' }}">
+                    {{-- <li class="{{ request()->is('patient/profile_settings*') ? 'active' : '' }}">
                         <a href="{{ route('patientProfile')}}">
                             <i class="fa-solid fa-user-pen"></i>
                             <span>Profile Settings</span>
                         </a>
                     </li>
-                    
+                     --}}
                     <li class="{{ request()->is('patient/change_password*') ? 'active' : '' }}">
                         <a href="{{ route('patientChangePassword')}}">
                             <i class="fa-solid fa-key"></i>
-                            <span>Change Password</span>
+                            <span>My Profile</span>
                         </a>
                     </li>
                     

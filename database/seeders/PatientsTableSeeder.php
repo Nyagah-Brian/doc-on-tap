@@ -2,11 +2,13 @@
 
 namespace Database\Seeders;
 
+use App\Models\Role;
 use App\Models\User;
 use App\Models\Patient;
-use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Faker\Factory as Faker;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class PatientsTableSeeder extends Seeder
 {
@@ -19,7 +21,7 @@ class PatientsTableSeeder extends Seeder
 
         // Define common Kenyan medical record number formats
         $mrnFormats = [
-            'HOSP/####/YY', 
+            'HOSP/####/YY',
             '#####/YY',
             'ABC####',
         ];
@@ -31,21 +33,27 @@ class PatientsTableSeeder extends Seeder
                 'last_name' => $faker->lastName,
                 'email' => $faker->unique()->safeEmail,
                 'email_verified_at' => now(),
-                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+                'password' => Hash::make('Brayo@2030.'), // password
                 'phone_number' => $faker->unique()->phoneNumber,
-                'country_code' => '254',  
+                'country_code' => '254',
                 'address' => $faker->address,
-                'birth_date' => $faker->dateTimeBetween('-60 years', '-18 years'), 
-                'gender' => $faker->randomElement(['male', 'female']), 
-                'status' => 'active', 
+                'birth_date' => $faker->dateTimeBetween('-60 years', '-18 years'),
+                'gender' => $faker->randomElement(['male', 'female']),
+                'status' => 'active',
             ]);
-           
+
+            // Get the "Administrator" role
+            $patientRole = Role::where('name', 'Patient')->first();
+
+            // Assign the role to the user
+            $user->assignRole($patientRole);
+
 
             // Create Patient (Linked to User)
-            $mrnFormat = $faker->randomElement($mrnFormats); 
+            $mrnFormat = $faker->randomElement($mrnFormats);
             Patient::create([
                 'user_id' => $user->id,
-                'medical_record_number' => $faker->unique()->numerify($mrnFormat), 
+                'medical_record_number' => $faker->unique()->numerify($mrnFormat),
                 'emergency_contact' => json_encode([
                     'name' => $faker->name,
                     'relationship' => $faker->randomElement(['Spouse', 'Parent', 'Sibling', 'Friend']),
