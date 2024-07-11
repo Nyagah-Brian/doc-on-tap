@@ -15,7 +15,7 @@ class PatientDashboard extends Controller
     public function index()
     {
         $page_title = 'Dashboard';
-        $patientId = Patient::where('user_id', auth()->user()->id)->first()->id; // Get logged-in user's patient ID
+        $patientId = Patient::where('user_id', auth()->user()->id)->first()->id;
 
         // Retrieve the patient's appointments, invoices, and records
         $appointments = Appointment::where('patient_id', $patientId)

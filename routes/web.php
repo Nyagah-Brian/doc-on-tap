@@ -15,7 +15,6 @@ use App\Http\Controllers\Patient\PasswordController;
 use App\Http\Controllers\Admin\AppointmentsController;
 use App\Http\Controllers\Admin\SpecialitiesController;
 use App\Http\Controllers\Admin\TransactionsController;
-use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Doctor\DoctorDashboard;
 use App\Http\Controllers\Patient\PatientAppointmentsController;
 

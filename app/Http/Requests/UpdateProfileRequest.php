@@ -25,7 +25,7 @@ class UpdateProfileRequest extends FormRequest
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.auth()->id()], // Unique email, excluding current user's email
-            'phone_number' => ['required', 'string'],
+            'phone_number' => ['required', 'string','unique:users,phone_number,'.auth()->id()],
             'current_password' => ['required_with:password'], // Required only if the new password is provided
             'password' => ['nullable', 'string', 'min:8', 'confirmed'],
         

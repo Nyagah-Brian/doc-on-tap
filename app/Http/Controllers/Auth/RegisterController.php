@@ -7,7 +7,6 @@ use App\Models\User;
 use App\Models\Patient;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Mail\AccountCreation;
 use App\Models\PasswordReset;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -29,7 +28,7 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         $validatedData = $request->validate([
-            'phone_number' => 'required',
+            'phone_number' => 'required|unique:users',
             'password' => 'required|min:8',
             'first_name' => 'required',
             'last_name' => 'required',
