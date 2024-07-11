@@ -14,7 +14,7 @@ class ReviewsController extends Controller
         $page_title = 'Reviews';
 
         // Retrieve all reviews with eager loading for associated models
-        $reviews = Review::with('appointment', 'appointment.review', 'appointment.doctor')->get();
+        $reviews = Review::with('appointment', 'appointment.doctor')->get();
 
         return view('admin.reviews', [
             'page_title' => $page_title,

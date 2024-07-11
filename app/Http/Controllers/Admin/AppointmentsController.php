@@ -14,7 +14,7 @@ class AppointmentsController extends Controller
         $page_title = 'Appointments';
 
         // Retrieve all appointments with appointment and doctor information using eager loading
-        $appointments = Appointment::with('appointment', 'doctor')->get();
+        $appointments = Appointment::with('doctor')->get();
 
         return view('admin.appointments', [
             'page_title' => $page_title,
