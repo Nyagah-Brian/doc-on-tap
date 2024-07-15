@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Doctor;
 
-use App\Http\Controllers\Controller;
+use App\Models\Appointment;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class DoctorDashboard extends Controller
 {
@@ -17,4 +18,5 @@ class DoctorDashboard extends Controller
             'page_title' => $page_title,
         ]);
     }
+
 }
