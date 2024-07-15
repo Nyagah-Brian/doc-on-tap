@@ -12,6 +12,9 @@
 
     <title>{{ $page_title }} : DocOnTap</title>
 
+    {{-- CSRF Token --}}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <link type="image/x-icon" href="{{ asset('assets/img/favicon.png')}}" rel="icon" />
 
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css')}}" />

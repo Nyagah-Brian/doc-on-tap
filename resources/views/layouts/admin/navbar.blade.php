@@ -1,10 +1,10 @@
 <div class="header">
     <div class="header-left">
         <a href="{{ route('admin.dashboard')}}" class="logo">
-            <img src="{{ asset('assets/admin/img/logo.png')}}" alt="Logo" />
+            <img src="{{ asset('assets/img/logo.png')}}" height="300px" alt="Logo" />
         </a>
         <a href="{{ route('admin.dashboard')}}" class="logo logo-small">
-            <img src="{{ asset('assets/admin/img/logo-small.png')}}" alt="Logo" width="30" height="30" />
+            <img src="{{ asset('assets/img/logo.png')}}" alt="Logo" width="30" height="30" />
         </a>
     </div>
 

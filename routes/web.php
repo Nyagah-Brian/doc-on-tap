@@ -39,18 +39,17 @@ Route::middleware(['auth'])->prefix('patient')->group(function () {
 
     Route::get('/', [PatientDashboard::class, 'index'])->name('patientDashboard');
     Route::get('/appointments', [PatientAppointmentsController::class, 'index'])->name('patientAppointments');
+    Route::get('/doctor/{doctorId}/available-times', [PatientAppointmentsController::class, 'getAvailableTimes']);
+    Route::post('/appointments', [PatientAppointmentsController::class, 'storeAppointment'])->name('appointments.store');
     Route::get('/invoices', [InvoicesController::class, 'index'])->name('patientInvoices');
     Route::get('/profile_settings', [ProfileController::class, 'index'])->name('patientProfile');
     Route::put('/profile_update', [ProfileController::class, 'update'])->name('patientProfileUpdate');
     Route::get('/profile', [PasswordController::class, 'index'])->name('patientChangePassword');
-    
 });
 
 Route::middleware(['auth'])->prefix('doctor')->group(function () {
 
     Route::get('/', [DoctorDashboard::class, 'index'])->name('doctorDashboard');
-
-    
 });
 
 //  Admin Dashboard Routes
@@ -65,5 +64,4 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/reviews', [ReviewsController::class, 'index'])->name('admin.reviews');
     Route::get('/specialities', [SpecialitiesController::class, 'index'])->name('admin.specialities');
     Route::get('/transactions', [TransactionsController::class, 'index'])->name('admin.transactions');
-    
 });

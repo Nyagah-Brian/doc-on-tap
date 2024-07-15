@@ -16,6 +16,7 @@ return new class extends Migration
             $table->uuid('patient_id');
             $table->uuid('doctor_id');
             $table->dateTime('appointment_time');
+            $table->longtext('reason_for_appointment')->nullable();
             $table->enum('status', ['scheduled', 'canceled', 'completed'])->default('scheduled');
             $table->timestamps();
             $table->softDeletes();

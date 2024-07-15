@@ -59,4 +59,9 @@ class User extends Authenticatable
         'metadata' => 'array',
         'password' => 'hashed',
     ];
+
+    public function patient()
+     {
+         return $this->hasMany(Patient::class);
+     }
 }
