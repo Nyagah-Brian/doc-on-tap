@@ -17,7 +17,7 @@ class LoginController extends Controller
 
     public function index()
     {
-        $page_title = 'Login';
+        $page_title = 'Login Doc-On-Tap';
 
         return view('auth.login', [
             'page_title' => $page_title,
