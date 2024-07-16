@@ -50,6 +50,8 @@ Route::middleware(['auth'])->prefix('patient')->group(function () {
 Route::middleware(['auth'])->prefix('doctor')->group(function () {
 
     Route::get('/', [DoctorDashboard::class, 'index'])->name('doctorDashboard');
+    Route::get('/appointments', [DoctorDashboard::class, 'appointments'])->name('doctor.appointments');
+    Route::get('/reviews', [DoctorDashboard::class, 'reviews'])->name('doctor.reviews');
 });
 
 //  Admin Dashboard Routes

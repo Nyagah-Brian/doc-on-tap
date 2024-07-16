@@ -43,7 +43,18 @@
                                         <td>{{ $invoice->total_amount }}</td>
                                         <td>{{ $invoice->status }}</td>
                                         <td>
-                                            {{-- Add your action buttons/links here (e.g., View, Edit, Send Reminder) --}}
+                                            <div class="actions">
+                                                {{-- Assuming you have a speciality edit route --}}
+                                                <a class="btn btn-sm bg-success-light" data-bs-toggle="modal"
+                                                    href=""> 
+                                                    <i class="fe fe-pencil"></i> Edit
+                                                </a>
+                                                {{-- Assuming you have a speciality delete route or can handle this via JavaScript --}}
+                                                <a class="btn btn-sm bg-danger-light" data-bs-toggle="modal"
+                                                    href="#delete_modal" onclick="confirmDelete('{{ $appointment->id }}')"> 
+                                                    <i class="fe fe-trash"></i> Delete
+                                                </a>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach
