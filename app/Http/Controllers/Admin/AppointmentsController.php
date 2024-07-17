@@ -73,10 +73,10 @@ class AppointmentsController extends Controller
     public function update_appointment_info(Request $request, Appointment $appointment)
     {
         $validatedData = $request->validate([
-            'first_name' => 'required',
+            'first_name' => 'required', //validation
         ]);
 
-        $appointment->update($validatedData);
+        $appointment->update($validatedData); //eloquent models
 
         Log::info("Appointment details updated successfully!");
   

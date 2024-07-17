@@ -28,10 +28,10 @@
                     <li class="{{ request()->is('admin/reviews*') ? 'active' : '' }}">
                         <a href="{{ route('admin.reviews') }}"><i class="fe fe-star-o"></i> <span>Reviews</span></a>
                     </li>
-                    <li class="{{ request()->is('admin/transactions*') ? 'active' : '' }}">
+                    <!-- <li class="{{ request()->is('admin/transactions*') ? 'active' : '' }}">
                         <a href="{{ route('admin.transactions') }}"><i class="fe fe-activity"></i>
                             <span>Transactions</span></a>
-                    </li>
+                    </li> -->
                 @endrole
 
                 @role('Doctor')

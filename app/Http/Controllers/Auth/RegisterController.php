@@ -41,7 +41,7 @@ class RegisterController extends Controller
             return redirect()
                 ->back()
                 ->withInput()
-                ->with(['error' => 'This account already exists.']);
+                ->with(['error' => 'This account already exists.']); //error handling,redirected
         }
 
         // Create a new user

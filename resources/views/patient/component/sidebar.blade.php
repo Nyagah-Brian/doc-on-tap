@@ -33,12 +33,12 @@
                     
                     
                     
-                    <li class="{{ request()->is('patient/invoices*') ? 'active' : '' }}">
+                    <!-- <li class="{{ request()->is('patient/invoices*') ? 'active' : '' }}">
                         <a href="{{ route('patientInvoices')}}">
                             <i class="fa-solid fa-file-lines"></i>
-                            <span>Invoices</span>
+                           <span>Invoices</span> 
                         </a>
-                    </li>
+                    </li> -->
 
                     {{-- <li class="{{ request()->is('patient/profile_settings*') ? 'active' : '' }}">
                         <a href="{{ route('patientProfile')}}">
