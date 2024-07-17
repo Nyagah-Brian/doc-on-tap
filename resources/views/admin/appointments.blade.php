@@ -31,7 +31,7 @@
                                             <th>Patient Name</th>
                                             <th>Appointment Time</th>
                                             <th>Status</th>
-                                            <th>Amount</th>
+                                            <!-- <th>Amount</th> -->
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -71,7 +71,7 @@
                                                             class="checktoggle">checkbox</label>
                                                     </div>
                                                 </td>
-                                                <td>
+                                                <!-- <td>
                                                     {{-- Fetch the invoice amount if available --}}
                                                     @php
                                                         $invoices = $appointment->invoice;
@@ -86,7 +86,7 @@
                                                         $amount = number_format($amount, 2);
                                                     @endphp
                                                     ksh {{ $amount }}
-                                                </td>
+                                                </td> -->
                                             </tr>
                                         @endforeach
                                     </tbody>

@@ -12,7 +12,7 @@
                     </p>
                 </div>
 
-                <div class="search-box">
+                <!-- <div class="search-box">
                     <form action="https://doccure.dreamstechnologies.com/html/template/search.html">
                         <div class="mb-3 search-location aos" data-aos="fade-up">
                             <input type="text" class="form-control" placeholder="Search Location" />
@@ -27,7 +27,7 @@
                             <i class="fas fa-search"></i> <span>Search</span>
                         </button>
                     </form>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
@@ -82,10 +82,10 @@
                                         <li>
                                             <i class="far fa-clock"></i> Available on Fri, 22 Mar
                                         </li>
-                                        <li>
+                                        <!-- <li>
                                             <i class="far fa-money-bill-alt"></i> $300 - $1000
                                             <i class="fas fa-info-circle" data-bs-toggle="tooltip" title="Lorem Ipsum"></i>
-                                        </li>
+                                        </li> -->
                                     </ul>
                                     <div class="row row-sm">
                                         <div class="col-6">
