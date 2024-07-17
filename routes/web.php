@@ -62,6 +62,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminDashboard::class, 'index'])->name('admin.dashboard');
     Route::get('/appointments', [AppointmentsController::class, 'index'])->name('admin.appointments');
     Route::get('/doctors', [DoctorsController::class, 'index'])->name('admin.doctors');
+    Route::post('/doctors', [DoctorsController::class, 'addDoctor'])->name('admin.addDoctor');
     Route::get('/patients', [PatientsController::class, 'index'])->name('admin.patients');
     Route::get('/reviews', [ReviewsController::class, 'index'])->name('admin.reviews');
     Route::get('/specialities', [SpecialitiesController::class, 'index'])->name('admin.specialities');

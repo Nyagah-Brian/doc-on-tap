@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Role;
+use App\Models\User;
 use App\Models\Doctor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class DoctorsController extends Controller
 {
@@ -15,7 +19,7 @@ class DoctorsController extends Controller
     {
         $page_title = 'Doctors';
 
-        $doctors = Doctor::with('speciality')->get(); 
+        $doctors = Doctor::with('speciality')->get();
 
         return view('admin.doctors', [
             'page_title' => $page_title,
@@ -47,15 +51,57 @@ class DoctorsController extends Controller
     public function addDoctor(Request $request)
     {
         $validatedData = $request->validate([
-            'first_name' => $request->first_name,
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'phone_number' => 'required|string|max:15|unique:users',
+            'address' => 'required|string|max:255',
+            'birth_date' => 'required|date',
+            'gender' => 'required|string|in:male,female',
+            'password' => 'required|string|min:8',
+            'speciality_id' => 'nullable|exists:specialities,id',
+            'license_number' => 'required|string|unique:doctors',
+            'years_of_experience' => 'required|integer|min:0',
         ]);
 
-        $doctor = Doctor::create($validatedData);
+        DB::beginTransaction();
 
-        Log::info("Doctor added " . $doctor);
+        try {
+            // Create User
+            $user = User::create([
+                'first_name' => $validatedData['first_name'],
+                'last_name' => $validatedData['last_name'],
+                'email' => $validatedData['email'],
+                'phone_number' => $validatedData['phone_number'],
+                'address' => $validatedData['address'],
+                'birth_date' => $validatedData['birth_date'],
+                'gender' => $validatedData['gender'],
+                'password' => Hash::make($validatedData['password']),
+                'status' => 'active', // default status
+            ]);
 
+            // Assign the "Doctor" role to the user
+            $doctorRole = Role::where('name', 'Doctor')->first();
+            $user->assignRole($doctorRole);
 
-        return redirect()->with('success', "Doctor has been added successfully!");
+            // Create Doctor details
+            $doctor = Doctor::create([
+                'user_id' => $user->id,
+                'speciality_id' => $validatedData['speciality_id'],
+                'license_number' => $validatedData['license_number'],
+                'years_of_experience' => $validatedData['years_of_experience'],
+            ]);
+
+            DB::commit();
+
+            Log::info("Doctor added: " . $doctor);
+
+            return redirect()->back()->with('success', "Doctor has been added successfully!");
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error("Error adding doctor: " . $e->getMessage());
+            return redirect()->back()->with('error', "An error occurred while adding the doctor.");
+        }
     }
 
     // Loads the edid doctor page
@@ -63,7 +109,7 @@ class DoctorsController extends Controller
     public function edit_doc_info(Doctor $doctor)
     {
         $page_title = 'Edit doctor info' . $doctor->first_name;
-  
+
         return view('admin.doctors', [
             'page_title' => $page_title,
             'doctor' => $doctor,
@@ -81,7 +127,7 @@ class DoctorsController extends Controller
         $doctor->update($validatedData);
 
         Log::info("Doctor details updated successfully!");
-  
+
         return redirect()->route('admin.doctors')->with('success', 'Doctor details updated successfully');
     }
 

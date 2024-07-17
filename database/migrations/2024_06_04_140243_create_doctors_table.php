@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('doctors', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('user_id')->unique();
-            $table->uuid('speciality_id');
+            $table->uuid('speciality_id')->nullable();
             $table->string('license_number')->unique();
             $table->integer('years_of_experience')->nullable();
             $table->timestamps();
